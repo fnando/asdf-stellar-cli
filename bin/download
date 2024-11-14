@@ -11,15 +11,15 @@ source "${plugin_dir}/lib/utils.bash"
 mkdir -p "$ASDF_DOWNLOAD_PATH/bin"
 
 if [[ "$(uname)" == "Darwin" ]]; then
-  os="apple-darwin"
+	os="apple-darwin"
 else
-  os="unknown-linux-gnu"
+	os="unknown-linux-gnu"
 fi
 
 if [[ "$(uname -m)" == "arm64" ]]; then
-  arch="aarch64"
+	arch="aarch64"
 else
-  arch="x86_64"
+	arch="x86_64"
 fi
 
 release_file="$ASDF_DOWNLOAD_PATH/stellar-cli-${ASDF_INSTALL_VERSION}-${arch}-${os}.tar.gz"

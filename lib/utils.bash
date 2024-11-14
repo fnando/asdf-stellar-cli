@@ -30,12 +30,12 @@ list_github_tags() {
 }
 
 list_all_versions() {
-  # This will list only the last two major versions, always favoring non-rc
-  # releases.
-	list_github_tags | \
-  tr ' ' '\n' | \
-  sort -V | \
-  awk -F. '
+	# This will list only the last two major versions, always favoring non-rc
+	# releases.
+	list_github_tags |
+		tr ' ' '\n' |
+		sort -V |
+		awk -F. '
   {
       major_minor = $1 "." $2  # Capture the major and minor parts as the key
       if (!($0 ~ /-rc/) || !(major_minor in last)) {
@@ -43,16 +43,16 @@ list_all_versions() {
       }
   }
   END { for (i in last) print last[i] }
-  ' | \
-  sort -V |
-  tail -n2
+  ' |
+		sort -V |
+		tail -n2
 }
 
 download_release() {
 	local version filename url
 	version="$1"
 	filename="$2"
-  targz=$(basename "$filename")
+	targz=$(basename "$filename")
 	url="$GH_REPO/releases/download/v${version}/${targz}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
