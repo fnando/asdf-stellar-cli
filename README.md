@@ -24,20 +24,20 @@
 Plugin:
 
 ```shell
-asdf plugin add stellar-cli https://github.com/fnando/asdf-stellar-cli.git
+asdf plugin add stellar https://github.com/fnando/asdf-stellar-cli.git
 ```
 
 stellar-cli:
 
 ```shell
 # Show all installable versions
-asdf list-all stellar-cli
+asdf list-all stellar
 
 # Install specific version
-asdf install stellar-cli latest
+asdf install stellar latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global stellar-cli latest
+asdf global stellar latest
 
 # Now stellar-cli commands are available
 stellar --version
