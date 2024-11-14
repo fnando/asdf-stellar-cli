@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+current_script_path=${BASH_SOURCE[0]}
+plugin_dir=$(dirname "$(dirname "$current_script_path")")
+
+# shellcheck source=./lib/utils.bash
+source "${plugin_dir}/lib/utils.bash"
+
+mkdir -p "$ASDF_DOWNLOAD_PATH/bin"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  os="apple-darwin"
+else
+  os="unknown-linux-gnu"
+fi
+
+if [[ "$(uname -m)" == "arm64" ]]; then
+  arch="aarch64"
+else
+  arch="x86_64"
+fi
+
+release_file="$ASDF_DOWNLOAD_PATH/stellar-cli-${ASDF_INSTALL_VERSION}-${arch}-${os}.tar.gz"
+
+# Download tar.gz file to the download directory
+download_release "$ASDF_INSTALL_VERSION" "$release_file"
+
+#  Extract contents of tar.gz file into the download directory
+tar -xzf "$release_file" -C "$ASDF_DOWNLOAD_PATH/bin" || fail "Could not extract $release_file"
+
+# Remove the tar.gz file since we don't need to keep it
+rm "$release_file"
